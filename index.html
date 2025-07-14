@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BellaVita - Salone di Bellezza</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <i class="fas fa-spa me-2"></i>BellaVita
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#servizi">Servizi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#team">Il Team</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#prezzi">Prezzi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#location">Dove Siamo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary text-white px-3 ms-2" href="#prenota">Prenota</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <h1 class="hero-title">Riscopri la tua bellezza naturale</h1>
+                    <p class="hero-subtitle">Parrucchieri ed estetisti professionisti per il tuo benessere</p>
+                    <a href="#prenota" class="btn btn-primary btn-lg mt-4">Prenota Ora</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="container mt-3">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ 'success' if category == 'success' else 'danger' }} alert-dismissible fade show">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Services Section -->
+    <section id="servizi" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title">I Nostri Servizi</h2>
+                    <p class="section-subtitle">Scopri la nostra gamma completa di trattamenti di bellezza</p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card text-center">
+                        <div class="service-icon">
+                            <i class="fas fa-cut"></i>
+                        </div>
+                        <h4>Taglio Donna</h4>
+                        <p>Tagli moderni e personalizzati per valorizzare la tua personalità e il tuo stile unico.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card text-center">
+                        <div class="service-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h4>Colore</h4>
+                        <p>Colorazioni professionali, mèches e balayage per un look sempre alla moda.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card text-center">
+                        <div class="service-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h4>Trattamento Viso</h4>
+                        <p>Trattamenti viso personalizzati per ogni tipo di pelle, con prodotti naturali di qualità.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card text-center">
+                        <div class="service-icon">
+                            <i class="fas fa-hand-sparkles"></i>
+                        </div>
+                        <h4>Manicure</h4>
+                        <p>Cura delle unghie con smalti di ultima generazione e nail art personalizzata.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card text-center">
+                        <div class="service-icon">
+                            <i class="fas fa-spa"></i>
+                        </div>
+                        <h4>Massaggi</h4>
+                        <p>Massaggi rilassanti e terapeutici per il tuo benessere psico-fisico.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card text-center">
+                        <div class="service-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h4>Sopracciglia</h4>
+                        <p>Design e cura delle sopracciglia per uno sguardo perfetto e definito.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title">Il Nostro Team</h2>
+                    <p class="section-subtitle">Professionisti esperti al tuo servizio</p>
+                </div>
+            </div>
+            
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6">
+                    <div class="team-card text-center">
+                        <div class="team-image">
+                            <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Giulia - Hair Stylist" class="img-fluid">
+                        </div>
+                        <h4>Giulia Romano</h4>
+                        <p class="team-role">Hair Stylist Senior</p>
+                        <p class="team-bio">Con oltre 10 anni di esperienza, Giulia è specializzata in tagli moderni e colorazioni creative. La sua passione per l'hair styling la rende una vera artista dei capelli.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="team-card text-center">
+                        <div class="team-image">
+                            <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Marco - Estetista" class="img-fluid">
+                        </div>
+                        <h4>Marco Bianchi</h4>
+                        <p class="team-role">Estetista Qualificato</p>
+                        <p class="team-bio">Marco è un estetista certificato con una passione per i trattamenti viso naturali. La sua attenzione ai dettagli garantisce risultati sempre eccellenti.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="team-card text-center">
+                        <div class="team-image">
+                            <img src="https://images.unsplash.com/photo-1559599101-f09722fb4948?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Sofia - Nail Artist" class="img-fluid">
+                        </div>
+                        <h4>Sofia Verdi</h4>
+                        <p class="team-role">Nail Artist & Manicurista</p>
+                        <p class="team-bio">Sofia è la nostra esperta di nail art e cura delle unghie. La sua creatività e precisione rendono ogni manicure un'opera d'arte unica.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="prezzi" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title">Listino Prezzi</h2>
+                    <p class="section-subtitle">Prezzi trasparenti per tutti i nostri servizi</p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="pricing-card">
+                        <h4>Servizi Capelli</h4>
+                        <div class="pricing-list">
+                            <div class="pricing-item">
+                                <span>Taglio Donna</span>
+                                <span class="price">€30</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span>Taglio Uomo</span>
+                                <span class="price">€20</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span>Piega</span>
+                                <span class="price">€25</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span>Colore</span>
+                                <span class="price">€45</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span>Mèches</span>
+                                <span class="price">€55</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span>Trattamento Ristrutturante</span>
+                                <span class="price">€35</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="pricing-card">
+                        <h4>Servizi Estetici</h4>
+                        <div class="pricing-list">
+                            <div class="pricing-item">
+                                <span>Pulizia Viso</span>
+                                <span class="price">€40</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span>Trattamento Anti-Age</span>
+                                <span class="price">€60</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span>Manicure</span>
+                                <span class="price">€20</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span>Pedicure</span>
+                                <span class="price">€25</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span>Sopracciglia</span>
+                                <span class="price">€15</span>
+                            </div>
+                            <div class="pricing-item">
+                                <span>Massaggio Rilassante (60 min)</span>
+                                <span class="price">€50</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="prenota" class="py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="text-center mb-5">
+                        <h2 class="section-title">Prenota il Tuo Appuntamento</h2>
+                        <p class="section-subtitle">Compila il form per richiedere la tua prenotazione</p>
+                    </div>
+                    
+                    <div class="booking-form">
+                        <form method="POST" action="{{ url_for('prenota') }}">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="nome" class="form-label">Nome Completo *</label>
+                                    <input type="text" class="form-control" id="nome" name="nome" required>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Email *</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label for="telefono" class="form-label">Telefono *</label>
+                                    <input type="tel" class="form-control" id="telefono" name="telefono" required>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label for="data" class="form-label">Data Preferita *</label>
+                                    <input type="date" class="form-control" id="data" name="data" required>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <label for="servizio" class="form-label">Servizio Richiesto *</label>
+                                    <select class="form-select" id="servizio" name="servizio" required>
+                                        <option value="">Seleziona un servizio</option>
+                                        <option value="Taglio Donna">Taglio Donna - €30</option>
+                                        <option value="Taglio Uomo">Taglio Uomo - €20</option>
+                                        <option value="Piega">Piega - €25</option>
+                                        <option value="Colore">Colore - €45</option>
+                                        <option value="Mèches">Mèches - €55</option>
+                                        <option value="Pulizia Viso">Pulizia Viso - €40</option>
+                                        <option value="Trattamento Anti-Age">Trattamento Anti-Age - €60</option>
+                                        <option value="Manicure">Manicure - €20</option>
+                                        <option value="Pedicure">Pedicure - €25</option>
+                                        <option value="Sopracciglia">Sopracciglia - €15</option>
+                                        <option value="Massaggio">Massaggio Rilassante - €50</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <label for="messaggio" class="form-label">Note Aggiuntive</label>
+                                    <textarea class="form-control" id="messaggio" name="messaggio" rows="4" placeholder="Inserisci eventuali richieste particolari o note per l'appuntamento..."></textarea>
+                                </div>
+                                
+                                <div class="col-12 text-center">
+                                    <button type="submit" class="btn btn-primary btn-lg">
+                                        <i class="fas fa-calendar-check me-2"></i>Invia Richiesta
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title">Dove Trovarci</h2>
+                    <p class="section-subtitle">Vieni a trovarci nel cuore di Roma</p>
+                </div>
+            </div>
+            
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-6">
+                    <div class="location-info">
+                        <div class="location-item mb-4">
+                            <div class="location-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="location-details">
+                                <h5>Indirizzo</h5>
+                                <p>Via Roma 123, 00100 Roma (RM)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="location-item mb-4">
+                            <div class="location-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="location-details">
+                                <h5>Orari di Apertura</h5>
+                                <p>Lun - Ven: 9:00 - 19:00<br>Sabato: 9:00 - 18:00<br>Domenica: Chiuso</p>
+                            </div>
+                        </div>
+                        
+                        <div class="location-item">
+                            <div class="location-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="location-details">
+                                <h5>Telefono</h5>
+                                <p>+39 06 123 456 789</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="main-map-container">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.1234567890123!2d12.4963655!3d41.9027835!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f61b6532013ad%3A0x28f1c82e908503c4!2sVia%20del%20Corso%2C%20Roma%20RM%2C%20Italy!5e0!3m2!1sen!2sit!4v1642678901234!5m2!1sen!2sit"
+                            width="100%" 
+                            height="400" 
+                            style="border:0; border-radius: 15px;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h5>BellaVita</h5>
+                    <p>Il tuo salone di bellezza di fiducia nel cuore della città. Professionalità, qualità e attenzione al cliente sono i nostri valori fondamentali.</p>
+                </div>
+                
+                <div class="col-lg-4">
+                    <h5>Contatti</h5>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt me-2"></i>Via Roma 123, 00100 Roma</p>
+                        <p><i class="fas fa-phone me-2"></i>+39 06 123 456 789</p>
+                        <p><i class="fas fa-envelope me-2"></i>info@bellavita.it</p>
+                    </div>
+                    
+                    <!-- Google Maps Embed -->
+                    <div class="map-container mt-3">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.1234567890123!2d12.4963655!3d41.9027835!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f61b6532013ad%3A0x28f1c82e908503c4!2sVia%20del%20Corso%2C%20Roma%20RM%2C%20Italy!5e0!3m2!1sen!2sit!4v1642678901234!5m2!1sen!2sit"
+                            width="100%" 
+                            height="200" 
+                            style="border:0; border-radius: 10px;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <h5>Orari</h5>
+                    <div class="opening-hours">
+                        <p>Lun - Ven: 9:00 - 19:00</p>
+                        <p>Sabato: 9:00 - 18:00</p>
+                        <p>Domenica: Chiuso</p>
+                    </div>
+                    
+                    <div class="social-links mt-3">
+                        <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="me-3"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-4">
+            
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p>&copy; 2025 BellaVita. Tutti i diritti riservati.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <div class="whatsapp-float" id="whatsapp-chat">
+        <div class="whatsapp-button">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+        <div class="whatsapp-tooltip">
+            Scrivici su WhatsApp!
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
